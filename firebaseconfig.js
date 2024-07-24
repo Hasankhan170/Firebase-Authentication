@@ -3,6 +3,7 @@
 
  
 
+
  const firebaseConfig = {
    apiKey: "AIzaSyCdBY-uSfyHegP4lgbgpPUjl8udnzWDecs",
    authDomain: "fir-authentication-9f772.firebaseapp.com",
@@ -16,4 +17,9 @@
 
  export const app = initializeApp(firebaseConfig);
  export const auth = getAuth(app);
+
+ 
+
+
+
 

@@ -46,7 +46,13 @@
     font-size: 18px;
     font-weight: bolder;
 }
-
+.register-link{
+    margin-top: 10px;
+}
+.register-link a{
+    text-decoration: none;
+    color: blue;
+}
 @media(max-width:525px){
     #loginForm{
         width: 100%;
