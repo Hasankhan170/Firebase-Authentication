@@ -17,6 +17,8 @@ form.addEventListener('submit' ,(e)=>{
     email.value = "";
     password.value = "";
 
+    // window.location = 'index.html'
+
     form.reset()
   })
   .catch((error) => {
