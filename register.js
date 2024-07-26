@@ -3,7 +3,9 @@ import { auth } from "./firebaseconfig.js";
 
 const form = document.querySelector('#loginForm')
 const email = document.querySelector('#email')
-const password = document.querySelector('#password')
+const password = document.querySelector('#password') 
+
+
 
 form.addEventListener('submit' ,(e)=>{
     e.preventDefault();
@@ -17,7 +19,6 @@ form.addEventListener('submit' ,(e)=>{
     email.value = "";
     password.value = "";
 
-    // window.location = 'index.html'
 
     form.reset()
   })
@@ -27,3 +28,5 @@ form.addEventListener('submit' ,(e)=>{
   });
 
 })
+
+// JAB USER REGISTER HOJAY TW WO LOGIN WALY PAGE PR CHALA JAY BTN KY CLICK PR 

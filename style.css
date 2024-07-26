@@ -46,12 +46,26 @@
     font-size: 18px;
     font-weight: bolder;
 }
+
+.forgotPassword{
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bolder;
+    color: blue;
+}
 .register-link{
-    margin-top: 10px;
+    margin-top: 15px;
+
 }
 .register-link a{
     text-decoration: none;
     color: blue;
+
 }
 @media(max-width:525px){
     #loginForm{
