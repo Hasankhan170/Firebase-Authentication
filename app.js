@@ -1,10 +1,11 @@
-import { signInWithEmailAndPassword ,sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+import { signInWithEmailAndPassword ,sendPasswordResetEmail , signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { auth } from "./firebaseconfig.js";
 
 const form = document.querySelector('#loginForm')
 const email = document.querySelector('#email')
 const password = document.querySelector('#password')
 const forgotPassword = document.querySelector('.forgotPassword')
+const googleBtn = document.querySelector('.google-btn')
 
 form.addEventListener('submit' ,(e)=>{
     e.preventDefault();
@@ -45,3 +46,25 @@ forgotPassword.addEventListener("click", () => {
       console.log(errorMessage);
     });
 });
+
+
+// google authentication 
+
+const googleProvider = new GoogleAuthProvider();
+
+googleBtn.addEventListener('click' , ()=>{
+
+  console.log("google login");
+
+  signInWithPopup(auth, googleProvider)
+  .then((result) => {
+    const user = result.user;
+    console.log(user);
+    window.location = 'home.html'
+
+  }).catch((error) => {
+
+    const errorMessage = error.message;
+    console.log(errorMessage);
+  });
+})
