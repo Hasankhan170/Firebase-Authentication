@@ -16,6 +16,8 @@ form.addEventListener('submit' ,(e)=>{
     const user = userCredential.user;
     console.log(user);
 
+    window.location = 'index.html'
+
     email.value = "";
     password.value = "";
 

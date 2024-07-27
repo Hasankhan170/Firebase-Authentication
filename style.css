@@ -48,18 +48,20 @@
 }
 
 .forgotPassword{
-    padding: 10px;
-    color: white;
+    /* padding: 10px; */
+    background-color: transparent;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 15px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bolder;
     color: blue;
+    align-items: right;
+    display: flex;
 }
 .register-link{
-    margin-top: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 
 }
 .register-link a{
