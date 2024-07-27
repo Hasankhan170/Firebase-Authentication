@@ -10,6 +10,10 @@ const googleBtn = document.querySelector('.google-btn')
 form.addEventListener('submit' ,(e)=>{
     e.preventDefault();
 
+    if(email.value === '' || password.value === ''){
+      alert('Please fill all fields')
+      return;
+    }
 
     signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
@@ -17,7 +21,6 @@ form.addEventListener('submit' ,(e)=>{
       console.log(user);
 
       window.location = 'home.html'
-
     })
     .catch((error) => {
       const errorMessage = error.message;
