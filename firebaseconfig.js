@@ -2,8 +2,6 @@
  import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
  
-
-
  const firebaseConfig = {
    apiKey: "AIzaSyCdBY-uSfyHegP4lgbgpPUjl8udnzWDecs",
    authDomain: "fir-authentication-9f772.firebaseapp.com",
