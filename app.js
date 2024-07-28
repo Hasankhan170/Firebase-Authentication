@@ -1,7 +1,8 @@
 import { signInWithEmailAndPassword ,
          sendPasswordResetEmail ,
          signInWithPopup,
-         GoogleAuthProvider, } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+         GoogleAuthProvider,
+         GithubAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { auth } from "./firebaseconfig.js";
 
 const form = document.querySelector('#loginForm')
@@ -9,6 +10,7 @@ const email = document.querySelector('#email')
 const password = document.querySelector('#password')
 const forgotPassword = document.querySelector('.forgotPassword')
 const google = document.querySelector('.google-btn')
+const github = document.querySelector('.github-btn')
 
 form.addEventListener('submit' ,(e)=>{
     e.preventDefault();
@@ -76,8 +78,26 @@ google.addEventListener('click' , ()=>{
 
 
 
+// github authentication 
 
+const githubProvider = new GithubAuthProvider();
 
+github.addEventListener('click' , ()=>{
+
+  console.log("github login");
+
+  signInWithPopup(auth, githubProvider)
+  .then((result) => {
+    const user = result.user;
+    console.log(user);
+
+  }).catch((error) => {
+    const errorMessage = error.message;
+    console.log(errorMessage);
+
+  });
+
+});
 
 
 
