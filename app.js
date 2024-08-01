@@ -21,8 +21,10 @@ form.addEventListener('submit' ,(e)=>{
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
+      alert('login successfully')
 
-      window.location = 'home.html'
+       window.location = 'home.html'
+      
     })
     .catch((error) => {
       const errorMessage = error.message;
@@ -65,7 +67,10 @@ google.addEventListener('click' , ()=>{
   .then((result) => {
     const user = result.user;
     console.log(user);
-    window.location = "home.html";
+    alert(' login google successfully')
+    setTimeout(()=>{
+     window.location = "home.html";
+    },1000)
   })
   .catch((error) => {
     const errorMessage = error.message;
@@ -90,7 +95,10 @@ github.addEventListener('click' , ()=>{
   .then((result) => {
     const user = result.user;
     console.log(user);
-    window.location = "home.html";
+    alert('login github successfully')
+    setTimeout(()=>{
+      window.location = "home.html";
+     },1000)
 
   }).catch((error) => {
     const errorMessage = error.message;

@@ -59,17 +59,6 @@ rendersTodo()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 onAuthStateChanged(auth, (user) => {
     if (user) {
       const uid = user.uid;
@@ -84,6 +73,7 @@ onAuthStateChanged(auth, (user) => {
 
   logoutBtn.addEventListener('click' , ()=>{
     signOut(auth).then(() => {
+      alert('logout successfully')
       window.location = 'index.html'
     }).catch((error) => {
       console.log(error);
