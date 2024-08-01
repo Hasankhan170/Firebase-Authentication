@@ -70,7 +70,7 @@ google.addEventListener('click' , ()=>{
     alert(' login google successfully')
     setTimeout(()=>{
      window.location = "home.html";
-    },1000)
+    },2000)
   })
   .catch((error) => {
     const errorMessage = error.message;
@@ -98,7 +98,7 @@ github.addEventListener('click' , ()=>{
     alert('login github successfully')
     setTimeout(()=>{
       window.location = "home.html";
-     },1000)
+     },2000)
 
   }).catch((error) => {
     const errorMessage = error.message;
