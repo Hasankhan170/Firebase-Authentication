@@ -15,7 +15,10 @@ const github = document.querySelector('.github-btn')
 form.addEventListener('submit' ,(e)=>{
     e.preventDefault();
 
-
+    if(email.value === '' || password.value === ''){
+      alert("email and password are required");
+      return;
+    }
 
     signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
@@ -41,6 +44,10 @@ form.addEventListener('submit' ,(e)=>{
 
 
 forgotPassword.addEventListener("click", () => {
+  if(email.value === '' || password.value === ''){
+    alert("email and password are required");
+    return;
+  }
   const resetEmail = prompt("enter email");
   sendPasswordResetEmail(auth, resetEmail)
     .then(() => {

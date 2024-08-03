@@ -29,30 +29,25 @@ function rendersTodo(){
     <button class="edit-Btn">Edit</button>
     `
   })
+
   const deleteBtn = document.querySelectorAll('.delete-Btn')
-const editItem = document.querySelectorAll('.edit-Btn')
+  const editItem = document.querySelectorAll('.edit-Btn')
 
-deleteBtn.forEach((btn ,index)=>{
-  btn.addEventListener('click' , async ()=>{
-    await deleteDoc(doc(db, "todos", arr[index].id));
-    arr.splice(index,1)
-    rendersTodo()
+  deleteBtn.forEach((btn,index)=>{
+    btn.addEventListener('click' , async ()=>{
+      await deleteDoc(doc(db, "todos", arr[index].id));
+      arr.splice(index,1)
+      rendersTodo()
+    })
+    
   })
-})
 
 
-editItem.forEach((btn, index) => {
-  btn.addEventListener("click", async () => {
-    const updatedNewValue = prompt("enter new value");
-    const todoUpdate = doc(db, "todos", arr[index].id);
-    await updateDoc(todoUpdate, {
-      todo: updatedNewValue,
-    });
-    console.log("Data updated");
-    arr[index].todo = updatedNewValue;
-    rendersTodo()
-  });
-});
+  editItem.forEach((btn)=>{
+    btn.addEventListener('click', ()=>{})
+  })
+
+
 
 }
 
@@ -64,18 +59,11 @@ editItem.forEach((btn, index) => {
 todoForm.addEventListener('submit' , async (e)=>{
   e.preventDefault();
  
-
   if(todoInput === ''){
     alert('Please enter a valid todo')
     return;
   }
  
-
-
-
-
-
-
 
   try {
     const docRef = await addDoc(collection(db, "todos"), {
@@ -96,6 +84,7 @@ todoForm.addEventListener('submit' , async (e)=>{
 })
 
 
+// bina sign up or login kary baghair dosri side pr jane sy rokta ha 
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -105,6 +94,9 @@ onAuthStateChanged(auth, (user) => {
         window.location = 'index.html'
     }
   });
+
+
+  // logout krne ky liye use ho raha ha
 
 
   const logoutBtn = document.querySelector('.logout')
