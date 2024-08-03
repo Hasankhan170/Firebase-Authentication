@@ -8,7 +8,14 @@ const todoForm = document.querySelector('.form-todo')
 const todoInput = document.querySelector('.todo-input')
 const ul = document.querySelector('ul')
 
+// global arr 
+
+
 let arr = []
+
+
+// data get krne k lie 
+
 
 async function getData(){
   const querySnapshot = await getDocs(collection(db, "todos"));
@@ -19,6 +26,9 @@ async function getData(){
     rendersTodo()
 }
 getData()
+
+// screen pr data render krne ky liye 
+
 
 function rendersTodo(){
   ul.innerHTML = ""
@@ -33,6 +43,10 @@ function rendersTodo(){
   const deleteBtn = document.querySelectorAll('.delete-Btn')
   const editItem = document.querySelectorAll('.edit-Btn')
 
+
+  // data delete screen and firestore 
+
+
   deleteBtn.forEach((btn,index)=>{
     btn.addEventListener('click' , async ()=>{
       await deleteDoc(doc(db, "todos", arr[index].id));
@@ -41,6 +55,9 @@ function rendersTodo(){
     })
     
   })
+
+
+// data edit screen and firestore
 
 
   editItem.forEach((btn,index)=>{
@@ -55,14 +72,13 @@ function rendersTodo(){
     })
   })
 
-
-
 }
 
 
 
 
 
+// taken form value 
 
 todoForm.addEventListener('submit' , async (e)=>{
   e.preventDefault();
