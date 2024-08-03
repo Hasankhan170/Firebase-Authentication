@@ -8,10 +8,8 @@ const todoForm = document.querySelector('.form-todo')
 const todoInput = document.querySelector('.todo-input')
 const ul = document.querySelector('ul')
 const select = document.querySelector('#select')
-const reset = document.querySelector('.allCate')
-
-
-const cateBtn = document.querySelectorAll('.caties-Btn')
+const citiesBtn = document.querySelectorAll('.cities-btn')
+const reset = document.querySelector(".reset");
 
 
 
@@ -21,28 +19,20 @@ const cateBtn = document.querySelectorAll('.caties-Btn')
 let arr = []
 
 
-cateBtn.forEach((btn)=>{
+citiesBtn.forEach((btn)=>{
   btn.addEventListener('click', async (e)=>{
     arr = []
-    const category = e.target.innerHTML
-    
-
-   try {
-    const citiesRef = collection(db, "todos"); 
-    const q = query(citiesRef, where("categories", "==", category),
-    orderBy("time", "desc")
-  );
+    const todoRef = collection(db, "todos");
+    const q = query(
+      todoRef,
+      where("categories", "==", e.target.innerHTML),orderBy("time", "desc"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      arr.push({...doc.data() , id:doc.id})
+      arr.push({ ...doc.data(), id: doc.id });
     });
+
     
     rendersTodo()
-   } catch (error) {
-    console.error("Error getting documents: ", error);
-    
-   }
-    
   })
 })
 
@@ -52,23 +42,32 @@ reset.addEventListener("click", getData);
 // data get krne k lie 
 
 async function getData(){
+  
   arr = []
-  const q =  query(collection(db, "todos"),orderBy("time", "desc"));
+  const q = query(collection(db, "todos"), orderBy("time", "desc"));
   const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-  console.log(doc.data());
-  arr.push({...doc.data() , id :doc.id})
+   querySnapshot.forEach((doc) => {
+   console.log(doc.data());
+   
+   arr.push({...doc.data() , id:doc.id})
+   
+   
+   
 });
-    
-    rendersTodo()
-}
 
+rendersTodo()
+
+}
 getData()
 
 // screen pr data render krne ky liye 
 
 
 function rendersTodo(){
+  if (arr.length === 0) {
+    ul.innerHTML = "no data found";
+    return;
+  }
   ul.innerHTML = ""
   arr.map((item) => {
     ul.innerHTML += `
@@ -78,6 +77,12 @@ function rendersTodo(){
     <button class="edit-Btn">Edit</button>
     `
   })
+
+  renderDeleteAndEdit()
+
+}
+
+function renderDeleteAndEdit(){
 
   const deleteBtn = document.querySelectorAll('.delete-Btn')
   const editItem = document.querySelectorAll('.edit-Btn')
@@ -116,10 +121,7 @@ function rendersTodo(){
     rendersTodo()
     })
   })
-
 }
-
-
 
 
 
