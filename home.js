@@ -43,8 +43,16 @@ function rendersTodo(){
   })
 
 
-  editItem.forEach((btn)=>{
-    btn.addEventListener('click', ()=>{})
+  editItem.forEach((btn,index)=>{
+    btn.addEventListener('click', async ()=>{
+      const newValue = prompt('enter new value')
+      const cityRef = doc(db, 'todos', arr[index].id);
+      await updateDoc(cityRef, {
+        todo: newValue
+    });
+    arr[index].todo = newValue
+    rendersTodo()
+    })
   })
 
 
