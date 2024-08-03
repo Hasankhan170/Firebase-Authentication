@@ -25,21 +25,25 @@ cateBtn.forEach((btn)=>{
   btn.addEventListener('click', async (e)=>{
     arr = []
     const category = e.target.innerHTML
+    
+
+   try {
     const citiesRef = collection(db, "todos"); 
     const q = query(citiesRef, where("categories", "==", category),
     orderBy("time", "desc")
   );
     const querySnapshot = await getDocs(q);
-    
     querySnapshot.forEach((doc) => {
       arr.push({...doc.data() , id:doc.id})
     });
-    console.log(category);
+    
     rendersTodo()
+   } catch (error) {
+    console.error("Error getting documents: ", error);
+    
+   }
     
   })
-
-
 })
 
 
