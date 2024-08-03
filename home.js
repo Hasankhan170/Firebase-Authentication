@@ -1,7 +1,7 @@
 import { onAuthStateChanged ,signOut } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { auth } from "./firebaseconfig.js";
 
-import { collection, addDoc ,  getDocs , doc, deleteDoc , Timestamp, updateDoc, query, where , orderBy, } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; 
+import { collection, addDoc ,  getDocs , doc, deleteDoc , updateDoc,Timestamp, query, where , orderBy, } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; 
 import { db } from "./config.js";
 
 const todoForm = document.querySelector('.form-todo')
@@ -11,7 +11,7 @@ const select = document.querySelector('#select')
 const reset = document.querySelector('.allCate')
 
 
-const cateBtn = document.querySelectorAll('.cateBtn')
+const cateBtn = document.querySelectorAll('.caties-Btn')
 
 
 
@@ -22,18 +22,23 @@ let arr = []
 
 
 cateBtn.forEach((btn)=>{
-  arr = []
   btn.addEventListener('click', async (e)=>{
-    const citiesRef = collection(db, "todos"); // shi ha
-    const q = query(citiesRef, where("categories", "==", e.target.innerHTML),
+    arr = []
+    const category = e.target.innerHTML
+    const citiesRef = collection(db, "todos"); 
+    const q = query(citiesRef, where("categories", "==", category),
     orderBy("time", "desc")
   );
     const querySnapshot = await getDocs(q);
+    
     querySnapshot.forEach((doc) => {
       arr.push({...doc.data() , id:doc.id})
     });
+    console.log(category);
     rendersTodo()
+    
   })
+
 
 })
 
@@ -42,16 +47,6 @@ reset.addEventListener("click", getData);
 
 // data get krne k lie 
 
-
-// async function getData() {
-//   arr = [];
-//   const q = query(collection(db, "todos"), orderBy("time", "desc"));
-//   const querySnapshot = await getDocs(q);
-//   querySnapshot.forEach((doc) => {
-//     arr.push({ ...doc.data(), id: doc.id });
-//   });
-//   rendersTodo();
-// }
 async function getData(){
   arr = []
   const q =  query(collection(db, "todos"),orderBy("time", "desc"));
@@ -60,6 +55,7 @@ async function getData(){
   console.log(doc.data());
   arr.push({...doc.data() , id :doc.id})
 });
+    
     rendersTodo()
 }
 
@@ -73,6 +69,7 @@ function rendersTodo(){
   arr.map((item) => {
     ul.innerHTML += `
     <li>${item.todo}, categories : ${item.categories}</li>
+    <p>${item.time ? item.time.toDate() : "no time"}</p>
     <button class="delete-Btn">Delete</button>
     <button class="edit-Btn">Edit</button>
     `
@@ -136,7 +133,8 @@ todoForm.addEventListener('submit' , async (e)=>{
   try {
     const docRef = await addDoc(collection(db, "todos"), {
       todo : todoInput.value,
-      categories : select.value
+      categories : select.value,
+      time: Timestamp.fromDate(new Date()),
     });
     
     console.log("Document written with ID: ", docRef.id);
