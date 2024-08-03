@@ -7,6 +7,8 @@ import { db } from "./config.js";
 const todoForm = document.querySelector('.form-todo')
 const todoInput = document.querySelector('.todo-input')
 const ul = document.querySelector('ul')
+const select = document.querySelector('#select')
+
 
 // global arr 
 
@@ -34,7 +36,7 @@ function rendersTodo(){
   ul.innerHTML = ""
   arr.map((item) => {
     ul.innerHTML += `
-    <li>${item.todo}</li>
+    <li>${item.todo}, categories : ${item.categories}</li>
     <button class="delete-Btn">Delete</button>
     <button class="edit-Btn">Edit</button>
     `
@@ -61,12 +63,18 @@ function rendersTodo(){
 
 
   editItem.forEach((btn,index)=>{
+
     btn.addEventListener('click', async ()=>{
+
       const newValue = prompt('enter new value')
       const cityRef = doc(db, 'todos', arr[index].id);
       await updateDoc(cityRef, {
         todo: newValue
     });
+    if(newValue === '' || newValue === null){
+      alert('Please enter value')
+      return;
+    }
     arr[index].todo = newValue
     rendersTodo()
     })
@@ -92,11 +100,13 @@ todoForm.addEventListener('submit' , async (e)=>{
   try {
     const docRef = await addDoc(collection(db, "todos"), {
       todo : todoInput.value,
+      categories : select.value
     });
     
     console.log("Document written with ID: ", docRef.id);
     arr.push({
       todo : todoInput.value,
+      categories : select.value,
       id : docRef.id
     })
     rendersTodo()
